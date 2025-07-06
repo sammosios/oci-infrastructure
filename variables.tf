@@ -19,7 +19,7 @@ variable "arm_shape" {
 
 variable "architecture" {
   description = "The architecture of the VM (amd or arm)."
-  default     = "arm"
+  default     = "amd"
 }
 
 variable "ubuntu_arm_image_id" {
@@ -30,4 +30,10 @@ variable "ubuntu_arm_image_id" {
 variable "ubuntu_amd_image_id" {
   description = "The OCID of the Ubuntu 24.04 AMD image."
   default     = "ocid1.image.oc1.eu-stockholm-1.aaaaaaaam6t7hfwppnu4ki6eej4kfytqfapcsrtuyu5r2rqybidhtr6k54ja"
+}
+
+variable "worker_token" {
+  description = "The k0s worker join token."
+  type        = string
+  sensitive   = true
 }
