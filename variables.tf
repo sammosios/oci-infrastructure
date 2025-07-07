@@ -7,6 +7,11 @@ variable "ssh_public_key_path" {
   default     = "./ssh-pub.key"
 }
 
+variable "ssh_private_key_path" {
+  description = "The path to the SSH private key file."
+  default     = "./ssh-priv.key"
+}
+
 variable "amd_shape" {
   description = "The shape of the AMD VM."
   default     = "VM.Standard.E2.1.Micro"
@@ -32,8 +37,3 @@ variable "ubuntu_amd_image_id" {
   default     = "ocid1.image.oc1.eu-stockholm-1.aaaaaaaam6t7hfwppnu4ki6eej4kfytqfapcsrtuyu5r2rqybidhtr6k54ja"
 }
 
-variable "worker_token" {
-  description = "The k0s worker join token."
-  type        = string
-  sensitive   = true
-}

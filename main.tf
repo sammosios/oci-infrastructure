@@ -43,7 +43,7 @@ resource "oci_core_security_list" "k0s_security_list" {
 
   ingress_security_rules {
     protocol    = "6" # TCP
-    source      = oci_core_vcn.k0s_vcn.cidr_block
+    source      = "0.0.0.0/0"
     source_type = "CIDR_BLOCK"
     tcp_options {
       min = 6443
@@ -130,7 +130,7 @@ resource "oci_core_instance" "k0s_worker_amd" {
 
   metadata = {
     ssh_authorized_keys = file(var.ssh_public_key_path)
-    user_data           = base64encode(templatefile("${path.module}/k0s-worker-init.yaml.tpl", { worker_token = var.worker_token }))
+    user_data           = base64encode(templatefile("${path.module}/k0s-worker-init.yaml.tpl", {}))
   }
 }
 
@@ -184,7 +184,7 @@ resource "oci_core_instance" "k0s_worker_arm" {
 
   metadata = {
     ssh_authorized_keys = file(var.ssh_public_key_path)
-    user_data           = base64encode(templatefile("${path.module}/k0s-worker-init.yaml.tpl", { worker_token = var.worker_token }))
+    user_data           = base64encode(templatefile("${path.module}/k0s-worker-init.yaml.tpl", {}))
   }
 }
 
@@ -196,3 +196,5 @@ output "k0s_controller_public_ip" {
 output "k0s_worker_public_ip" {
   value = var.architecture == "amd" ? oci_core_instance.k0s_worker_amd[0].public_ip : oci_core_instance.k0s_worker_arm[0].public_ip
 }
+
+
